@@ -28,7 +28,7 @@ class EnquiryListRemoteDataSource {
 
     // Make the GET request
     final response = await dio.get<Map<String, dynamic>>(
-      'http://143.110.181.12:7070/api/get_enquiries',
+      baseURL + enquiryListEndpoint,
       queryParameters: queryParams,
     );
 
@@ -38,9 +38,6 @@ class EnquiryListRemoteDataSource {
       final data = response.data;
       log(data!.entries.toString());
       return EnquiryListResponse.fromMap(data);
-
-      // log(data);
-      // ...
     } else {
       // Error
       // ...
