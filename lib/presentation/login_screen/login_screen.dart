@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:beegains_login_test/core/app_export.dart';
 import 'package:beegains_login_test/data/models/login_credentials.dart';
-import 'package:beegains_login_test/presentation/controllers/login_controller/login_controller.dart';
+import 'package:beegains_login_test/presentation/login_screen/login_controller.dart';
 import 'package:beegains_login_test/widgets/custom_button.dart';
 import 'package:beegains_login_test/widgets/custom_icon_button.dart';
 import 'package:beegains_login_test/widgets/custom_text_form_field.dart';
@@ -48,7 +46,7 @@ class LoginScreen extends StatelessWidget {
             CustomTextFormField(
                 focusNode: FocusNode(),
                 controller: emailController,
-                hintText: "Your Email",
+                hintText: "Your username",
                 margin: getMargin(top: 28),
                 padding: TextFormFieldPadding.PaddingT14,
                 textInputType: TextInputType.emailAddress,
@@ -74,7 +72,7 @@ class LoginScreen extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) => GestureDetector(
                 onTap: () {
-                  _login(context, ref);
+                  _loginUser(context, ref);
                 },
                 child: CustomButton(
                     height: getVerticalSize(57),
@@ -89,53 +87,46 @@ class LoginScreen extends StatelessWidget {
                     textAlign: TextAlign.left,
                     style: AppStyle.txtPoppinsBold12
                         .copyWith(letterSpacing: getHorizontalSize(0.5)))),
-            GestureDetector(
-                onTap: () {
-                  onTapTxtDonthaveana(context);
-                },
-                child: Padding(
-                    padding: getPadding(top: 7, bottom: 5),
-                    child: RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                              text: "Don't have an account?",
-                              style: TextStyle(
-                                  color: ColorConstant.blueGray300,
-                                  fontSize: getFontSize(12),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: getHorizontalSize(0.5))),
-                          TextSpan(
-                              text: " ",
-                              style: TextStyle(
-                                  color: ColorConstant.indigoA200,
-                                  fontSize: getFontSize(12),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: getHorizontalSize(0.5))),
-                          TextSpan(
-                              text: "Register",
-                              style: TextStyle(
-                                  color: ColorConstant.lightBlueA200,
-                                  fontSize: getFontSize(12),
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: getHorizontalSize(0.5)))
-                        ]),
-                        textAlign: TextAlign.left)))
+            Padding(
+                padding: getPadding(top: 7, bottom: 5),
+                child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: "Don't have an account?",
+                          style: TextStyle(
+                              color: ColorConstant.blueGray300,
+                              fontSize: getFontSize(12),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: getHorizontalSize(0.5))),
+                      TextSpan(
+                          text: " ",
+                          style: TextStyle(
+                              color: ColorConstant.indigoA200,
+                              fontSize: getFontSize(12),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: getHorizontalSize(0.5))),
+                      TextSpan(
+                          text: "Register",
+                          style: TextStyle(
+                              color: ColorConstant.lightBlueA200,
+                              fontSize: getFontSize(12),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: getHorizontalSize(0.5)))
+                    ]),
+                    textAlign: TextAlign.left))
           ]),
         ),
       ),
     );
   }
 
-  onTapTxtDonthaveana(BuildContext context) {
-    // TODO: implement Actions
-  }
-
-  void _login(BuildContext context, WidgetRef ref) {
+  void _loginUser(BuildContext context, WidgetRef ref) async {
     final loginCred = LoginCredentials(
         username: emailController.text, password: passwordController.text);
-    ref.read(authenticationProvider.notifier).loginUser(loginCred);
+
+    await ref.read(authenticationProvider.notifier).loginUser(loginCred);
   }
 }
