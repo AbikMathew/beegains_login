@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:beegains_login_test/routes/app_routes.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       title: 'beegains_login_test',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.appNavigationScreen,
+      initialRoute: AppRoutes.splashScreen,
       routes: AppRoutes.routes,
     );
   }
