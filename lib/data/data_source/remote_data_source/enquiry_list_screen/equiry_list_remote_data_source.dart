@@ -39,9 +39,8 @@ class EnquiryListRemoteDataSource {
       log(data!.entries.toString());
       return EnquiryListResponse.fromMap(data);
     } else {
-      // Error
-      // ...
+      // 
+      return null;
     }
-    return null;
   }
 }

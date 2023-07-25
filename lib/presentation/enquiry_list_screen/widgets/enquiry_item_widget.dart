@@ -1,11 +1,14 @@
-import 'package:beegains_login_test/core/app_export.dart';
-import 'package:beegains_login_test/data/models/enquiry_item.dart';
 import 'package:flutter/material.dart';
 
-class EnquiryItemWidget extends StatelessWidget {
-  const EnquiryItemWidget({required this.enquiry, this.onTapOrder});
+import 'package:beegains_login_test/core/app_export.dart';
+import 'package:beegains_login_test/data/models/enquiry_item.dart';
 
-  final VoidCallback? onTapOrder;
+import 'enquiry_item_text_2.dart';
+
+class EnquiryItemWidget extends StatelessWidget {
+  const EnquiryItemWidget({required this.enquiry, this.onTapEnquiry});
+
+  final VoidCallback? onTapEnquiry;
   final Enquiry? enquiry;
 
   @override
@@ -14,7 +17,7 @@ class EnquiryItemWidget extends StatelessWidget {
       width: double.maxFinite,
       child: GestureDetector(
         onTap: () {
-          onTapOrder?.call();
+          onTapEnquiry?.call();
         },
         child: Container(
           padding: getPadding(
@@ -53,16 +56,7 @@ class EnquiryItemWidget extends StatelessWidget {
                     left: 16,
                     top: 3,
                   ),
-                  child: Text(
-                    enquiry?.enquiryDate ?? '',
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                    style: AppStyle.txtPoppinsRegular12Indigo90087.copyWith(
-                      letterSpacing: getHorizontalSize(
-                        0.5,
-                      ),
-                    ),
-                  ),
+                  child: EnquiryItemText2(text: enquiry?.enquiryDate ?? ''),
                 ),
               ),
               Padding(
@@ -70,51 +64,28 @@ class EnquiryItemWidget extends StatelessWidget {
                   top: 22,
                 ),
                 child: Divider(
-                  height: getVerticalSize(
-                    1,
-                  ),
-                  thickness: getVerticalSize(
-                    1,
-                  ),
+                  height: getVerticalSize(1),
+                  thickness: getVerticalSize(1),
                   color: ColorConstant.blue50,
                 ),
               ),
               Padding(
-                padding: getPadding(
-                  left: 16,
-                  top: 14,
-                  right: 16,
-                ),
+                padding: getPadding(left: 16, top: 14, right: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: getPadding(
-                        bottom: 1,
-                      ),
-                      child: Text(
-                        "Enquiry number",
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPoppinsRegular12Indigo90087.copyWith(
-                          letterSpacing: getHorizontalSize(
-                            0.5,
-                          ),
-                        ),
-                      ),
+                      padding: getPadding(bottom: 1),
+                      child: EnquiryItemText2(text: 'Enquiry Number'),
                     ),
                     Padding(
-                      padding: getPadding(
-                        top: 1,
-                      ),
+                      padding: getPadding(top: 1),
                       child: Text(
                         enquiry?.enquiryNo ?? "",
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtPoppinsRegular12Indigo900.copyWith(
-                          letterSpacing: getHorizontalSize(
-                            0.5,
-                          ),
+                          letterSpacing: getHorizontalSize(0.5),
                         ),
                       ),
                     ),
@@ -122,41 +93,22 @@ class EnquiryItemWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: getPadding(
-                  left: 16,
-                  top: 9,
-                  right: 17,
-                ),
+                padding: getPadding(left: 16, top: 9, right: 17),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: getPadding(
-                        bottom: 1,
-                      ),
-                      child: Text(
-                        "Phone number",
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPoppinsRegular12Indigo90087.copyWith(
-                          letterSpacing: getHorizontalSize(
-                            0.5,
-                          ),
-                        ),
-                      ),
+                      padding: getPadding(bottom: 1),
+                      child: EnquiryItemText2(text: 'Phone number'),
                     ),
                     Padding(
-                      padding: getPadding(
-                        top: 1,
-                      ),
+                      padding: getPadding(top: 1),
                       child: Text(
                         enquiry?.primaryMobile ?? '',
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtPoppinsRegular12Indigo900.copyWith(
-                          letterSpacing: getHorizontalSize(
-                            0.5,
-                          ),
+                          letterSpacing: getHorizontalSize(0.5),
                         ),
                       ),
                     ),
@@ -164,33 +116,17 @@ class EnquiryItemWidget extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: getPadding(
-                  left: 16,
-                  top: 9,
-                  right: 17,
-                  bottom: 1,
-                ),
+                padding: getPadding(left: 16, top: 9, right: 17, bottom: 1),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "RC Owner",
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtPoppinsRegular12Indigo90087.copyWith(
-                        letterSpacing: getHorizontalSize(
-                          0.5,
-                        ),
-                      ),
-                    ),
+                    EnquiryItemText2(text: 'RC Owner'),
                     Text(
                       enquiry?.rcOwnerName ?? "",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: AppStyle.txtPoppinsBold12.copyWith(
-                        letterSpacing: getHorizontalSize(
-                          0.5,
-                        ),
+                        letterSpacing: getHorizontalSize(0.5),
                       ),
                     ),
                   ],

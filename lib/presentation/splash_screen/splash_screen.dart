@@ -1,11 +1,12 @@
 import 'package:beegains_login_test/core/utils/enums.dart';
 import 'package:beegains_login_test/presentation/login_screen/login_controller.dart';
 import 'package:beegains_login_test/presentation/login_screen/login_screen.dart';
-import 'package:beegains_login_test/presentation/order_screen/enquiry_list_screen.dart';
+import 'package:beegains_login_test/presentation/enquiry_list_screen/enquiry_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SplashScreen extends ConsumerWidget {
+  const SplashScreen();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authProvider = ref.watch(authenticationProvider);
@@ -27,29 +28,3 @@ class SplashScreen extends ConsumerWidget {
     );
   }
 }
-
- // return SafeArea(
-    //   child: Scaffold(
-    //     backgroundColor: ColorConstant.lightBlueA200,
-    //     body: Container(
-    //       width: double.maxFinite,
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: [
-    //           CustomImageView(
-    //             imagePath: ImageConstant.imgLogo,
-    //             height: getSize(
-    //               72,
-    //             ),
-    //             width: getSize(
-    //               72,
-    //             ),
-    //             margin: getMargin(
-    //               bottom: 5,
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );

@@ -1,16 +1,35 @@
-import 'package:beegains_login_test/presentation/login_screen/login_controller.dart';
-import 'package:beegains_login_test/presentation/order_screen/enquiry_list_controller.dart';
-import 'package:beegains_login_test/presentation/order_screen/widgets/enquiry_item_widget.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:beegains_login_test/core/app_export.dart';
 import 'package:beegains_login_test/widgets/app_bar/appbar_title.dart';
 import 'package:beegains_login_test/widgets/app_bar/custom_app_bar.dart';
-import 'package:flutter/material.dart';
+
+import '../../core/app_export.dart';
+import '../login_screen/login_controller.dart';
+import 'enquiry_list_controller.dart';
+import 'widgets/enquiry_item_widget.dart';
 
 class EnquiryListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      enquiryListProvider,
+      (previous, next) {},
+      onError: (error, stackTrace) =>
+          ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error: $error'),
+          action: SnackBarAction(
+            label: 'Retry',
+            onPressed: () {
+              // Retry the operation by calling the fetchEnquiryList method
+              ref.read(enquiryListProvider.notifier).fetchEnquiryList();
+            },
+          ),
+        ),
+      ),
+    );
+
     final enquiryList = ref.watch(enquiryListProvider);
 
     return SafeArea(
@@ -27,10 +46,10 @@ class EnquiryListScreen extends ConsumerWidget {
           ],
         ),
         body: enquiryList.when(
-          data: (data) => ListView.builder(
-              itemCount: data.length,
+          data: (enquiries) => ListView.builder(
+              itemCount: enquiries?.length,
               itemBuilder: (context, index) => EnquiryItemWidget(
-                    enquiry: data[index],
+                    enquiry: enquiries?[index],
                   )),
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
