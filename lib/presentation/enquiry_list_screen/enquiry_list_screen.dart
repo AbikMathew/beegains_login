@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:beegains_login_test/widgets/app_bar/appbar_title.dart';
-import 'package:beegains_login_test/widgets/app_bar/custom_app_bar.dart';
-
 import '../../core/app_export.dart';
+import '../../widgets/app_bar/appbar_title.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
 import '../login_screen/login_controller.dart';
 import 'enquiry_list_controller.dart';
+import 'widgets/enquiry_item_error_snackbar.dart';
 import 'widgets/enquiry_item_widget.dart';
 
 class EnquiryListScreen extends ConsumerWidget {
@@ -17,16 +17,7 @@ class EnquiryListScreen extends ConsumerWidget {
       (previous, next) {},
       onError: (error, stackTrace) =>
           ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $error'),
-          action: SnackBarAction(
-            label: 'Retry',
-            onPressed: () {
-              // Retry the operation by calling the fetchEnquiryList method
-              ref.read(enquiryListProvider.notifier).fetchEnquiryList();
-            },
-          ),
-        ),
+        errorSnackbar(error, ref),
       ),
     );
 
