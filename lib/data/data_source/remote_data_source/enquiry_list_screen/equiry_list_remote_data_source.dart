@@ -1,9 +1,8 @@
-import 'dart:developer';
-
-import 'package:beegains_login_test/core/utils/common_texts.dart';
-import 'package:beegains_login_test/data/models/enquiry_item.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../../../../core/utils/common_texts.dart';
+import '../../../models/enquiry_item.dart';
 
 class EnquiryListRemoteDataSource {
   final storage = new FlutterSecureStorage();
@@ -36,10 +35,9 @@ class EnquiryListRemoteDataSource {
     if (response.statusCode == 200) {
       // Success
       final data = response.data;
-      log(data!.entries.toString());
-      return EnquiryListResponse.fromMap(data);
+      return EnquiryListResponse.fromMap(data!);
     } else {
-      // 
+      // Null data exception is thrown in controller
       return null;
     }
   }
